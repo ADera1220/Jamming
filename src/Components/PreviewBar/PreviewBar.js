@@ -33,7 +33,7 @@ class PreviewBar extends React.Component {
                         <source> element declares the URL used to find the file for the
                         previewTrack and specifies the file type as mp3.
                     */}
-                    <source src={this.startPreview()} type='audio/mp3' />
+                    <source src={this.startPreview()} type='audio/mp3'></source>
                 </audio>
             </div>
         )

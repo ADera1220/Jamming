@@ -26,14 +26,14 @@ class TrackList extends React.Component {
                             , and isRemoval props to ensure the Track Compmonent has the necessary
                             functionality.
                         */
-                        return <Track
+                        return (<Track
                                     track={track} // The current track object
                                     key={track.id} // The unique ID of the track is the Key of the Component
                                     onAdd={this.props.onAdd} // Method originaly from App
                                     onRemove={this.props.onRemove} // Method originaly from App
                                     onPreview={this.props.onPreview} // Method originaly from App
                                     isRemoval={this.props.isRemoval} // Passed as a prop from either SearchResults or PlayList
-                                />;
+                                />)
                         })
                 }
             </div>

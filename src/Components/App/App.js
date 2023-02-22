@@ -19,7 +19,7 @@ class App extends React.Component {
       searchResults: [],
       playlistName: 'newPlaylist',
       playlistTracks: [],
-      preview: ''
+      preview: 'https://p.scdn.co/mp3-preview/3eb16018c2a700240e9dfb8817b6f2d041f15eb1?cid=774b29d4f13844c495f206cafdad9c86'
     }
 
     // Bind the Component methods
@@ -89,11 +89,11 @@ class App extends React.Component {
       sending this array to Spotify. If successful, the playlistName state should be reset.
     */
 
-    // const trackURIs = this.state.playlistTracks.map(track => track.uri);
+    const trackURIs = this.state.playlistTracks.map(track => track.uri);
 
-    // Spotify.savePlayList(this.state.playlistName, trackURIs);
+    Spotify.savePlayList(this.state.playlistName, trackURIs);
 
-    // this.updatePlayListName('New Playlist');
+    this.updatePlayListName('New Playlist');
   }
 
   search(term) {
@@ -105,14 +105,14 @@ class App extends React.Component {
       passed without value, the search is carried out with a blank space.
     */
 
-      // let kwrd = term === undefined ? ' ' : term;
+      let kwrd = term === undefined ? ' ' : term;
 
-      // Spotify.search(kwrd)
-      //   .then(result => {
-      //     this.setState({
-      //       searchResults: result
-      //     })
-      // })
+      Spotify.search(kwrd)
+        .then(result => {
+          this.setState({
+            searchResults: result
+          })
+      })
   }
 
   // Updates the track in the PreviewBar
@@ -122,7 +122,6 @@ class App extends React.Component {
       Component with the new URL. If the value passed up is the same as the current preview state
       then the method is ended without changes.
     */
-
       if(preview === this.state.preview) {
         return;
       }
@@ -139,7 +138,7 @@ class App extends React.Component {
         <div className='PreviewTrack'>
 
           <PreviewBar 
-            previewTrack={this.state.previewTrack} // Passes the track URL to the PreviewBar Component
+            previewTrack={this.state.preview} // Passes the track URL to the PreviewBar Component
           />
 
         </div>
@@ -158,7 +157,7 @@ class App extends React.Component {
 
             <PlayList 
               playlistName={this.state.playlistName} // State playlistName passed as prop
-              playlistTrack={this.state.playlistTracks} // State playListTracks passed as prop
+              playlistTracks={this.state.playlistTracks} // State playListTracks passed as prop
               onRemove={this.removeTrack} // Method removeTrack passed as prop
               onNameChange={this.updatePlayListName} // Method updatePlaylistName passed as prop
               onSave={this.savePlayList} // Method savePlayList passed as prop

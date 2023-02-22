@@ -69,13 +69,18 @@ class Track extends React.Component {
 
     // If the Preview button is clicked, executes the onPreview method from the "" Component
     handlePreview() {
-
+        /*
+            This method passes the track preview URL from the props up to the
+            previewTrack method of the App Component. This will re-render the PreviewBar
+            to make the current preview song the selected choice.
+        */
+       this.props.onPreview(this.props.track.preview);
     }
 
     // Prepares the JSX and passes it up to the TrackList Component
     render() {
         return (
-            <div>
+            <div className='Track'>
                 <div className='Track-information'>
                     <h3>{this.props.track.name}</h3>
 
