@@ -11,19 +11,28 @@ class PreviewBar extends React.Component {
         this.startPreview = this.startPreview.bind(this);
     }
 
-    // Forces the Component to re-render
     startPreview() {
-
+        /*
+            This provides the URL of the preview track to the <source> element below
+            as it attempts to play the track.
+        */
+       return this.props.previewTrack;
     }
 
     render() {
         return (
             <div className='PreviewBar' key={this.props.previewTrack}>
+
+                {/* Renders an audio player for the previewTrack */}
                 <audio controls>  
                     {
-                        // Log the Preview URL, for testing
+                        // Log the Preview track, for testing
                         console.log(this.props.previewTrack)
                     }
+                    {/*
+                        <source> element declares the URL used to find the file for the
+                        previewTrack and specifies the file type as mp3.
+                    */}
                     <source src={this.startPreview()} type='audio/mp3' />
                 </audio>
             </div>
