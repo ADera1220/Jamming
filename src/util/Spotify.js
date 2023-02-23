@@ -13,7 +13,7 @@
 let accessToken = '';
 const clientID = '05f982d5f78547a8ab272b64d670f56f';
 const url = 'https://accounts.spotify.com/authorize';
-const redirectURI = 'http://localhost:3000/';
+const redirectURI = 'https://jamming-app.herokuapp.com/';
 
 // The Spotify API utility is initialised as an object
 const Spotify = {
