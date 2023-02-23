@@ -11,7 +11,7 @@ class TrackList extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="TrackList">
                 {
                     /*
                         The map() method for the tracks array is used to ensurte all of the tracks

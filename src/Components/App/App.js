@@ -24,9 +24,11 @@ class App extends React.Component {
 
     // Bind the Component methods
     this.addTrack = this.addTrack.bind(this);
+    this.removeTrack = this.removeTrack.bind(this);
+    this.clearPlaylist = this.clearPlaylist.bind(this);
     this.previewTrack = this.previewTrack.bind(this);
     this.updatePlayListName = this.updatePlayListName.bind(this);
-    this.savePlayList = this.savePlayList.bind(this);
+    this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
     this.previewTrack = this.previewTrack.bind(this);
   }
@@ -39,7 +41,7 @@ class App extends React.Component {
       changed, the app will not allow duplicate tracks in a playlist.
     */
 
-      let tracks = this.state.tracks;
+      let tracks = this.state.playlistTracks;
 
       if(tracks.find(savedTrack => savedTrack.id === track.id)) {
         return;
@@ -57,18 +59,25 @@ class App extends React.Component {
       re-render the PlayList Component and it's children
     */
 
-    let tracks = this.state.playlistTracks;
+    let playlistTracks = this.state.playlistTracks;
+    let target = playlistTracks.indexOf(track);
 
-    if(tracks.find(savedTrack => savedTrack.id === track.id)) {
+    playlistTracks.splice(target, 1);
 
-      var index = tracks.indexOf(track);
+    this.setState({
+      playlistTracks: playlistTracks
+    })
+  }
 
-      delete tracks[index];
+  clearPlaylist() {
+    /*
+      If the CLEAR button is pressed, the playlistTracks state should be reset and the
+      Components should be re-rendered.
+    */
 
       this.setState({
-        playlistTracks: tracks
-      });
-    }
+        playlistTracks: []
+      })
   }
 
   updatePlayListName(name) {
@@ -82,7 +91,7 @@ class App extends React.Component {
       });
   }
 
-  savePlayList() {
+  savePlaylist() {
     /*
       This uses the current value of the playlistTracks array from the state, and save it to
       Spotify as a valid playlist. This requires grabbing an array of just the track URIs, then
@@ -91,7 +100,7 @@ class App extends React.Component {
 
     const trackURIs = this.state.playlistTracks.map(track => track.uri);
 
-    Spotify.savePlayList(this.state.playlistName, trackURIs);
+    Spotify.savePlaylist(this.state.playlistName, trackURIs);
 
     this.updatePlayListName('New Playlist');
   }
@@ -160,8 +169,9 @@ class App extends React.Component {
               playlistTracks={this.state.playlistTracks} // State playListTracks passed as prop
               onRemove={this.removeTrack} // Method removeTrack passed as prop
               onNameChange={this.updatePlayListName} // Method updatePlaylistName passed as prop
-              onSave={this.savePlayList} // Method savePlayList passed as prop
+              onSave={this.savePlaylist} // Method savePlayList passed as prop
               onPreview={this.previewTrack} // Method previewTrack passed as prop
+              onClear={this.clearPlaylist} // Method clearPlaylist passed as prop
               />
           </div>
         </div>

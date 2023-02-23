@@ -34,7 +34,7 @@ class Track extends React.Component {
             removeTrack method in the App Component, which will remove the track to the current
             TrackList
         */
-        this.props.removeTrack(this.props.track);
+        this.props.onRemove(this.props.track);
     }
 
     renderChange() {

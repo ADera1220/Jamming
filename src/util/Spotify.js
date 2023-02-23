@@ -154,6 +154,7 @@ const Spotify = {
         }
 
         const accessToken = Spotify.getAccessToken();
+        
         let userID;
         const headers = {
             Authorization: `Bearer ${accessToken}`

@@ -44,6 +44,12 @@ class PlayList extends React.Component {
                 >
                     SAVE TO SPOTIFY
                 </button>
+                <button 
+                    className='Playlist-clear'
+                    onClick={this.props.onClear} // Calls the onClear method from the App Component
+                >
+                    CLEAR LIST
+                </button>
             </div>
         )
     }
